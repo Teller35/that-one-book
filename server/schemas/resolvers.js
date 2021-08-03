@@ -1,8 +1,8 @@
 // import dependencies for resolvers to work
-const { User } = require("../models");
+const { User, Book } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const bookSchema = require("../models/Book");
+const { deleteBook } = require("../controllers/user-controller");
 
 // create the resolvers
 const resolvers = {
@@ -35,9 +35,35 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addBook: async (parent) => {},
-    removeBook: async (parent, args) => {
-      const deleteBook = await User.findOneAndUpdate(args);
+    saveBook: async (
+      parent,
+      { bookId, authors, title, description, image, link },
+      context
+    ) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $push: {
+              savedBooks: { bookId, authors, title, description, image, link },
+            },
+          },
+          { new: true, runValidators: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Need to be logged in!");
+    },
+    removeBook: async (parent, { bookId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: { bookId } } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Need to be logged in!");
     },
   },
 };

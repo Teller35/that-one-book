@@ -11,10 +11,10 @@ type User {
     savedBooks: [Book]
 }
 
-input Book {
+type Book {
     _id: ID
     bookId: String
-    authors: String
+    authors: [String]
     description: String
     title: String
     image: String
@@ -27,13 +27,14 @@ type Auth {
 }
 
 type Query {
-    me: User
+    me: [User]
+    user(username: String!): User
 }
 
-typeMutation {
+type Mutation {
    login(email: String!, password: String!) : Auth
    addUser(username: String!, email: String!, password: String!): Auth
-   saveBook(bookId: String!, authors: String!, description: String!, title: String!, image: String!, link: String!): User
+   saveBook(bookId: String!, authors: [String], description: String!, title: String!, image: String!, link: String!): User
    removeBook(bookId: String!): User
 }
 `;

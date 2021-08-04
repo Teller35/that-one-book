@@ -13,16 +13,13 @@ const db = require("./config/connection");
 const { typeDefs, resolvers } = require("./schemas");
 
 const PORT = process.env.PORT || 3001;
+const app = express();
 
-// create a new Apollo Server
-async function startApolloServer() {
-  const server = new ApolloServer({
+const server = new ApolloServer({
     typeDefs,
     resolvers,
     context: authMiddleware,
   });
-  await server.start();
-  const app = express();
   // integrate Apollo server with the express application as middleware
   server.applyMiddleware({ app });
 
@@ -47,6 +44,3 @@ async function startApolloServer() {
       );
     });
   });
-}
-
-startApolloServer();

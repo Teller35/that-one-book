@@ -7,7 +7,7 @@ import {
   Button,
 } from "react-bootstrap";
 // import mutation and query
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { GET_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutation";
 import { getMe, deleteBook } from "../utils/API";

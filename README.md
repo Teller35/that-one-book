@@ -5,7 +5,7 @@
   ## Description:
   #### *An app to do a book search save and delete from your list.*
   * *[View Project on GitHub](https://github.com/Teller35/that-one-book)*
-  * *[View Live]()*
+  * *[View Live](https://that-one-book.herokuapp.com/)*
 
   ## Table of Contents:
   * [**Installation**](#installation)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Jumbotron,
   Container,
@@ -10,7 +10,6 @@ import {
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { GET_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutation";
-import { getMe, deleteBook } from '../utils/API';
 import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
 

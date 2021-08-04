@@ -13,7 +13,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { SAVE_BOOK } from "../utils/mutation";
 
 import Auth from "../utils/auth";
-import { saveBook, searchGoogleBooks } from "../utils/API";
+import { searchGoogleBooks } from "../utils/API";
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
 const SearchBooks = () => {
@@ -73,8 +73,7 @@ const SearchBooks = () => {
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    console.log(Auth.getToken());
-    console.log(Auth.loggedIn());
+
     if (!token) {
       return false;
     }
